@@ -1,6 +1,6 @@
 const products = [
   {
-    _id: "1",
+    id: "1",
     name: "California Roll",
     image: "/images/image1.jpg",
     description:
@@ -13,7 +13,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "2",
+    id: "2",
     name: "Special Roll Sushi",
     image: "/images/image2.jpg",
     description: "Special sushi roll made in house",
@@ -25,7 +25,7 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "3",
+    id: "3",
     name: "Egg Sushi",
     image: "/images/image3.jpg",
     description: "Classic egg sushi on top of rice",
@@ -37,7 +37,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "4",
+    id: "4",
     name: "Sushi Platter",
     image: "/images/image4.png",
     description: "Perfect size for parties",
@@ -49,7 +49,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "5",
+    id: "5",
     name: "Black sesame vegetarian",
     image: "/images/image5.webp",
     description: "vegetarian black sesame sushi for our vegetarian friends",
@@ -61,7 +61,7 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: "6",
+    id: "6",
     name: "Salmon Sushi Cake",
     image: "/images/image6.jpg",
     description: "Celebrate the season with this delicious salmon sushi cake",
