@@ -1,0 +1,22 @@
+{
+  "name": "fullstackshop",
+  "version": "1.0.0",
+  "description": "Demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuniorChang/SojuSushi.git"
+  },
+  "author": "Jr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuniorChang/SojuSushi/issues"
+  },
+  "homepage": "https://github.com/JuniorChang/SojuSushi#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
