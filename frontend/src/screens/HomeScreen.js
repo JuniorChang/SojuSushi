@@ -37,8 +37,8 @@ const HomeScreen = () => {
           {products.map((product) => (
             <Col key={product._id} sm={12} md={6} lg={4}>
               <Link
+                style={{ textDecoration: "none " }}
                 to={`/product/${product._id}`}
-                style={{ textDecoration: "none" }}
               >
                 <Product product={product} />
               </Link>
