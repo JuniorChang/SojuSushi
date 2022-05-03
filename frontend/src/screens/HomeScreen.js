@@ -1,35 +1,50 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+// import axios from "axios";
+import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Product from "../components/Product";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../actions/productActions";
 
 const HomeScreen = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  // const [products, setProducts] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchProduct = async () => {
+  //     const { data } = await axios.get("/api/products");
+  //     setProducts(data);
+  //   };
+  //   fetchProduct();
+  // }, []);
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data);
-    };
-    fetchProduct();
-  }, []);
+    dispatch(listProducts());
+  }, [dispatch]);
 
   return (
     <>
       <h1> Latest Products</h1>
-      <Row>
-        {products.map((product) => (
-          <Col key={product._id} sm={12} md={6} lg={4}>
-            <Link
-              to={`/product/${product._id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Product product={product} />
-            </Link>
-          </Col>
-        ))}
-      </Row>
+      {loading ? (
+        <h2>Loading.....</h2>
+      ) : error ? (
+        <h3>{error}</h3>
+      ) : (
+        <Row>
+          {products.map((product) => (
+            <Col key={product._id} sm={12} md={6} lg={4}>
+              <Link
+                to={`/product/${product._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Product product={product} />
+              </Link>
+            </Col>
+          ))}
+        </Row>
+      )}
     </>
   );
 };
