@@ -18,7 +18,7 @@ const CartScreen = (location) => {
   const productId = useLocation().pathname.split("/")[2];
   const qty = useLocation().search.split("=")[1];
   // console.log(`productId: ${productId}`);
-  console.log(`Qty: ${qty}`);
+  // console.log(`Qty: ${qty}`);
 
   const dispatch = useDispatch();
 
