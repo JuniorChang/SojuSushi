@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,6 +17,10 @@ const CartScreen = (location) => {
   const navigate = useNavigate();
   const productId = useLocation().pathname.split("/")[2];
   const qty = useLocation().search.split("=")[1];
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   // console.log(`productId: ${productId}`);
   // console.log(`Qty: ${qty}`);
 
@@ -24,7 +28,7 @@ const CartScreen = (location) => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  console.log(`cartItems: ${cartItems}`);
+  // console.log(`cartItems: ${cartItems}`);
 
   useEffect(() => {
     if (productId) {
@@ -37,7 +41,12 @@ const CartScreen = (location) => {
   };
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=shipping");
+    // navigate("/shipping");
+    if (!userInfo) {
+      navigate("/login");
+    } else {
+      navigate("/shipping");
+    }
   };
 
   return (

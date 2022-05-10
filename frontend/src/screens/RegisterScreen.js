@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -18,8 +18,7 @@ const RegisterScreen = ({ location }) => {
   const navigate = useNavigate();
 
   //   console.log(`location: ${location}`);
-  //   const redirect = location.search ? location.search.split("=")[1] : "/";
-
+  //   const redirect = location.search ? location.search.split("=")[1] : "/"
   //   const test = useLocation().search;
   //   console.log(`test: ${test}`);
 
