@@ -10,7 +10,7 @@ export const OrderScreen = ({ match }) => {
   const orderId = match.params.id;
   const dispatch = useDispatch();
 
-  const orderDetails = useSelector((state) => state.ordeDetails);
+  const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
   const addDecimals = (num) => {
