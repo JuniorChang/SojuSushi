@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-// import { Link, useLocation } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-// import { register } from "../actions/userActions";
+
 import { useNavigate } from "react-router-dom";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import { listMyOrders } from "../actions/orderActions";
 import FormContainer from "../components/FormContainer";
 
-const ProfileScreen = ({ location }) => {
+const ProfileScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,12 +18,6 @@ const ProfileScreen = ({ location }) => {
   const [message, setMessage] = useState(null);
 
   const navigate = useNavigate();
-
-  //   console.log(`location: ${location}`);
-  //   const redirect = location.search ? location.search.split("=")[1] : "/";
-
-  //   const test = useLocation().search;
-  //   console.log(`test: ${test}`);
 
   const dispatch = useDispatch();
 
@@ -35,7 +30,11 @@ const ProfileScreen = ({ location }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
+  const orderListMy = useSelector((state) => state.orderListMy);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
+
   useEffect(() => {
+    console.log("userInfo", userInfo.name);
     if (!userInfo) {
       navigate("/login");
     } else {
@@ -44,6 +43,7 @@ const ProfileScreen = ({ location }) => {
       } else {
         setName(userInfo.name);
         setEmail(userInfo.email);
+        dispatch(listMyOrders());
       }
     }
   }, [userInfo, navigate, dispatch, user.name, user.email]);
@@ -115,6 +115,55 @@ const ProfileScreen = ({ location }) => {
       </Col>
       <Col md={5}>
         <h2>My Orders</h2>
+        {loadingOrders ? (
+          <Loader />
+        ) : errorOrders ? (
+          <Message variant="danger">{errorOrders}</Message>
+        ) : (
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Delivered</th>
+                <th>Delivered</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.createdAt.substring(0, 10)}</td>
+                  <td>{order.totalPrice}</td>
+                  <td>
+                    {order.isPaid ? (
+                      order.paidAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    <LinkContainer to={`/order/${order._id}`}>
+                      <Button className="btn-sm" variant="light">
+                        Details
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Col>
     </Row>
   );
