@@ -13,7 +13,7 @@ import {
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import Message from "../components/Message";
 
-const CartScreen = (location) => {
+const CartScreen = () => {
   const navigate = useNavigate();
   const productId = useLocation().pathname.split("/")[2];
   const qty = useLocation().search.split("=")[1];

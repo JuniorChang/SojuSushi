@@ -18,7 +18,6 @@ const ProfileScreen = () => {
   const [message, setMessage] = useState(null);
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
