@@ -9,15 +9,7 @@ import { listProducts } from "../actions/productActions";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  // const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchProduct = async () => {
-  //     const { data } = await axios.get("/api/products");
-  //     setProducts(data);
-  //   };
-  //   fetchProduct();
-  // }, []);
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 

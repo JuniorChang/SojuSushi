@@ -24,16 +24,10 @@ const ProductScreen = (history) => {
   const { product, loading, error } = productDetails;
 
   useEffect(() => {
-    // const fetchProduct = async () => {
-    //   const { data } = await axios.get("/api/products/" + id);
-    //   setProduct(data);
-    // };
-    // fetchProduct();
     dispatch(listProductDetails(id));
   }, [dispatch, id]);
 
   const addToCartHandler = () => {
-    // history.push("/cart/" + id + "?qty=" + qty);
     navigate(`/cart/${id}?qty=${qty}`);
   };
   return (
