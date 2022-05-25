@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,27 +9,39 @@ import FormContainer from "../components/FormContainer";
 
 import { getUserDetails } from "../actions/userActions";
 
-const UserEditScreen = (history) => {
+const UserEditScreen = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const { id } = useParams();
+  // console.log({ id });
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!user.name || user._id !== id) {
+      dispatch(getUserDetails(id));
+    } else {
+      setName(user.name);
+      setEmail(user.email);
+      setIsAdmin(user.isAdmin);
+    }
+  }, [dispatch, user, id]);
 
   const submitHandler = (e) => {
     e.preventDefault();
   };
 
+  console.log({ userDetails });
+
   return (
     <>
+      {/* <div> {id} </div> */}
+
       <Link to="/admin/userlist" className="btn btn-light my-3">
         Go Back
       </Link>
