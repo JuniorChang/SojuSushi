@@ -3,7 +3,7 @@ import Order from "../models/orderModel.js";
 
 // @desc   Create new order
 // @route  POST /api/orders
-// @accesss  Private
+// @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
@@ -37,7 +37,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
 // @desc   Update order to paid
 // @route  Get /api/orders/:id/pay
-// @accesss  Private
+// @accesss Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
 
@@ -60,7 +60,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 
 // @desc   Get order by id
 // @route  Get /api/orders/:id
-// @accesss  Private
+// @accesss Private
 const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate(
     "user",
@@ -77,7 +77,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 
 // @desc   Get user's orders
 // @route  Get /api/orders/myorders
-// @accesss  Private
+// @access  Private
 const getMyOrders = asyncHandler(async (req, res) => {
   const order = await Order.find({ user: req.user._id });
   res.json(order);
