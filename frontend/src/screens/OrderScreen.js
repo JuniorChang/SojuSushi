@@ -176,7 +176,7 @@ export const OrderScreen = () => {
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>
-                  {loadingPay && <Loader />}
+                  {/* {loadingPay && <Loader />} */}
                   {!sdkReady ? (
                     <Loader />
                   ) : (
