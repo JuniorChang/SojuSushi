@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
-        cb(null, `${file.fieldname}-${Data.now()}${path.extname(file.originalname)}`);
+        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
     }
 
 })
@@ -19,7 +19,7 @@ function checkFileType(file, cb) {
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
 
-    if(mimetype && extname) {
+    if(extname && mimetype) {
         return cb(null, true);
     } else {
         cb('Error: Images Only!');
@@ -34,7 +34,7 @@ const upload = multer({
 })
 
 router.post('/', upload.single('image'), (req, res) => {
-    res.send(`/${res.file.path}`);
+    res.send(`/${req.file.path}`);
 })
 
 
