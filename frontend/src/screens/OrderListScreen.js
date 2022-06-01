@@ -53,7 +53,7 @@ export const OrderListScreen = () => {
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
-                {/* <td> test </td> */}
+                
                 <td>{order.createdAt.toString().substr(0,10)}</td>
                 <td>${order.totalPrice}</td>
                 <td>
@@ -65,7 +65,7 @@ export const OrderListScreen = () => {
                 </td>
                 <td>
                   {order.isDelivered ? (
-                    order.deliveredAt.subString(0, 10)
+                    order.deliveredAt.substr(0, 10)
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
