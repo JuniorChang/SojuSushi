@@ -4,6 +4,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+
+import SearchBox from "./SearchBox";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,7 +18,6 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logout());
     navigate("/");
-
   };
 
   return (
@@ -27,6 +29,12 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+            {/* <Routes>
+              <Route
+                render={({ history }) => <SearchBox history={history} />}
+              />
+            </Routes> */}
+
             <Nav className="ms-auto">
               <LinkContainer to="cart">
                 <NavLink id="RouterNavLink" to="/cart">

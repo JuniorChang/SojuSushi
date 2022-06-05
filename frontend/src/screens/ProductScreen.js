@@ -40,18 +40,16 @@ const ProductScreen = (history) => {
     productReviewCreate;
 
   useEffect(() => {
-    dispatch(listProductDetails(id));
-    setHasLoaded(true);
-    // if (successProductReview) {
-    //   alert("Review submitted successfully");
-    //   setRating(0);
-    //   setComment("");
-    //   dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-    // }
-    // if (!product._id || product._id !== id) {
-    //   dispatch(listProductDetails(id));
-    //   dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-    // }
+    // dispatch(listProductDetails(id));
+    // setHasLoaded(true);
+    if (successProductReview) {
+      setRating(0);
+      setComment("");
+    }
+    if (!product._id || product._id !== id) {
+      dispatch(listProductDetails(id));
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+    }
   }, [dispatch, id, successProductReview, product._id]);
 
   const addToCartHandler = () => {
