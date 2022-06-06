@@ -5,8 +5,15 @@ import Product from "../models/productModel.js";
 // @route  GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  // throw new Error("nope");
+  const name = req.query.name
+    ? {
+        name: {
+          $regex: req.query.name,
+          $options: "i", //case insensitive
+        },
+      }
+    : {};
+  const products = await Product.find({ ...name });
   res.json(products);
 });
 
@@ -88,15 +95,16 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @route  POST /api/products/:id/reviews
 // @access Private/
 const createProductReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
 
-  const {rating, comment} = req.body;
-  
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString());
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
 
-    if(alreadyReviewed){
+    if (alreadyReviewed) {
       res.status(400);
       throw new Error("You have already reviewed this product");
     }
@@ -106,14 +114,16 @@ const createProductReview = asyncHandler(async (req, res) => {
       rating: Number(rating),
       comment,
       user: req.user._id,
-    }
+    };
     product.reviews.push(review);
     product.numReviews = product.reviews.length;
-    product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0 / product.reviews.length);
+    product.rating = product.reviews.reduce(
+      (acc, item) => item.rating + acc,
+      0 / product.reviews.length
+    );
 
-    await product.save()
-    res.status(201).json({message: "Review created"});
-
+    await product.save();
+    res.status(201).json({ message: "Review created" });
   } else {
     res.status(404);
     throw new Error("Product not found");
@@ -126,5 +136,5 @@ export {
   deleteProduct,
   createProduct,
   updateProduct,
-  createProductReview
+  createProductReview,
 };

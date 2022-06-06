@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import {
-  Navbar,
-  Nav,
-  Container,
-  NavLink,
-  NavDropdown,
-  Form,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Nav, Container, NavLink, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
-import { Route, Routes } from "react-router-dom";
+// import { Route, Routes } from "react-router-dom";
+import "../index.css";
 
 import SearchBox from "./SearchBox";
 
@@ -37,15 +30,15 @@ const Header = () => {
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
+        <Container className="test">
           <LinkContainer to="/">
             <Navbar.Brand>SoJu Sushi</Navbar.Brand>
           </LinkContainer>
+          <SearchBox />
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <SearchBox />
-            <Nav className="ml-auto">
+            <Nav className="ms-auto">
               <LinkContainer to="cart">
                 <NavLink id="RouterNavLink" to="/cart">
                   <i className="fas fa-shopping-cart"></i>Cart
