@@ -1,5 +1,13 @@
-import React from "react";
-import { Navbar, Nav, Container, NavLink, NavDropdown } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Navbar,
+  Nav,
+  Container,
+  NavLink,
+  NavDropdown,
+  Form,
+  Button,
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
@@ -15,6 +23,12 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // const [name, setName] = useState("");
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   navigate(`/search/${name}`);
+  // };
+
   const logoutHandler = () => {
     dispatch(logout());
     navigate("/");
@@ -27,15 +41,11 @@ const Header = () => {
           <LinkContainer to="/">
             <Navbar.Brand>SoJu Sushi</Navbar.Brand>
           </LinkContainer>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {/* <Routes>
-              <Route
-                render={({ history }) => <SearchBox history={history} />}
-              />
-            </Routes> */}
-
-            <Nav className="ms-auto">
+            <SearchBox />
+            <Nav className="ml-auto">
               <LinkContainer to="cart">
                 <NavLink id="RouterNavLink" to="/cart">
                   <i className="fas fa-shopping-cart"></i>Cart

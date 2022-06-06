@@ -3,35 +3,27 @@ import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const SearchBox = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
 
-  //   const [keyword, setKeyword] = useState("");
-
-  //   const submitHandler = (e) => {
-  //     e.preventDefault();
-  //     if (keyword.trim() === "") {
-  //       navigate(`/search/${keyword}`);
-  //     } else {
-  //       navigate("/");
-  //     }
-
+  const submitHandler = (e) => {
+    e.preventDefault();
+    alert(`Searching for ${name}`);
+  };
   return (
-    //   <Form onSubmit={submitHandler} inline>
-    //     <Form.Control
-    //       type="text"
-    //       name="q"
-    //       onChange={(e) => setKeyword(e.target.value)}
-    //       placeholder="Search Products..."
-    //       className="mr-sm-2 ml-sm-5"
-    //     />
-    //     <Button type="submit" variant="outline-success" className="p-2">
-    //       Search
-    //     </Button>
-    //   </Form>
-    <div>
-      {" "}
-      <h1> hello </h1>
-    </div>
+    <Form onSubmit={submitHandler} inline>
+      <Form.Control
+        type="text"
+        name="q"
+        onChange={(e) => setName(e.target.value)}
+        placeholder
+        className="mr-sm-2 ml-sm-5"
+      ></Form.Control>
+      <Button type="submit" variant="outline-success" className="p-2">
+        Search
+      </Button>
+    </Form>
+    // <h1> hi</h1>
   );
 };
 
