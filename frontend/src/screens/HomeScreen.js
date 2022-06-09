@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import Paginate from "../components/Paginate";
+import ProductCarousel from "../components/ProductCarousel";
 
 const HomeScreen = () => {
   const { name } = useParams();
@@ -22,6 +23,8 @@ const HomeScreen = () => {
 
   return (
     <>
+      {/* {!name && <ProductCarousel />} */}
+      <ProductCarousel />
       <h1> Latest Products</h1>
       {loading ? (
         <Loader />
